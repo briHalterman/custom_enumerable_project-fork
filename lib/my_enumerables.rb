@@ -28,6 +28,16 @@ module Enumerable
     end
     new_array
   end
+
+  def my_all?
+    # Returns true if the block returns a truthy value for every element
+    self.my_each do |item|
+      if !yield(item)
+        return false
+      end
+    end
+    true
+  end
 end
 
 # You will first have to define my_each
