@@ -1,6 +1,7 @@
 module Enumerable
   # Your code goes here
   def my_map
+    # Iterates through a collection and builds a new array containing the results of running the block once for each element
     new_array = []
     for item in self
       new_array << yield(item)
@@ -9,11 +10,23 @@ module Enumerable
   end
 
   def my_each_with_index
+    # Iterates through a collection and yields each element along with its index, returning the original collection
     index = 0
     self.my_each do |item|
       yield(item, index)
       index += 1
     end
+  end
+
+  def my_select
+    # Iterates through a collection and builds a new array containing only the elements for which the block returns a truthy value
+    new_array = []
+    self.my_each do |item|
+      if yield(item)
+        new_array << item
+      end
+    end
+    new_array
   end
 end
 
@@ -23,6 +36,7 @@ end
 # to this method
 class Array
   # Define my_each here
+  # Iterates through a collection and yields each element to a block, returning the original collection unchanged
   def my_each
     for item in self
       yield(item)
