@@ -38,6 +38,16 @@ module Enumerable
     end
     true
   end
+
+  def my_any?
+    # Returns true if the block returns a truthy value for at least one element
+    self.my_each do |item|
+      if yield(item)
+        return true
+      end
+    end
+    false
+  end
 end
 
 # You will first have to define my_each
