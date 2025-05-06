@@ -50,12 +50,32 @@ module Enumerable
   end
 
   def my_none?
+    # Returns true if the block returns a falsey value for every element
     self.my_each do |item|
       if yield(item)
         return false
       end
     end
     true
+  end
+
+  def my_count(arg = nil)
+    # Returns the number of elements that match a given argument or block condition, or the total number of elements if no block or argument is given
+    counter = 0
+    self.my_each do |item|
+      if block_given?
+        if yield(item)
+          counter += 1
+        end
+      elsif !arg.nil?
+        if item == arg
+          counter += 1
+        end
+      else
+        return self.length
+      end
+    end
+    return counter
   end
 end
 
