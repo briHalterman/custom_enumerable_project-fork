@@ -48,6 +48,15 @@ module Enumerable
     end
     false
   end
+
+  def my_none?
+    self.my_each do |item|
+      if yield(item)
+        return false
+      end
+    end
+    true
+  end
 end
 
 # You will first have to define my_each
