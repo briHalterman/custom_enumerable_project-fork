@@ -7,6 +7,14 @@ module Enumerable
     end
     new_array
   end
+
+  def my_each_with_index
+    index = 0
+    self.my_each do |item|
+      yield(item, index)
+      index += 1
+    end
+  end
 end
 
 # You will first have to define my_each
@@ -22,4 +30,3 @@ class Array
   end
 end
 
-[1, 2, 3].map(&:even?)
