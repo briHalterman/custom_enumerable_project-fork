@@ -1,6 +1,6 @@
 module Enumerable
   # Your code goes here
-  def my_map
+  def my_map # collect
     # Iterates through a collection and builds a new array containing the results of running the block once for each element
     new_array = []
     for item in self
@@ -18,7 +18,7 @@ module Enumerable
     end
   end
 
-  def my_select
+  def my_select # filter
     # Iterates through a collection and builds a new array containing only the elements for which the block returns a truthy value
     new_array = []
     self.my_each do |item|
@@ -76,6 +76,23 @@ module Enumerable
       end
     end
     return counter
+  end
+
+  def my_inject(accumulator = nil) # reduce
+    # Combines all elements of a collection, specified by a block, and returns accumulated result
+    skip_first = false
+
+    if accumulator.nil?
+      accumulator = self[0]
+      skip_first = true
+    end
+
+    self.my_each_with_index do |item, index|
+      next if skip_first && index == 0
+      accumulator = yield(accumulator, item)
+    end
+
+    accumulator
   end
 end
 
